@@ -10,7 +10,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Plus, Search, Filter, Download } from "lucide-react";
+import { Plus, Search, Filter, Download, Phone, Mail } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const Leads = () => {
   const leads = [
@@ -23,7 +24,8 @@ const Leads = () => {
       source: "Website",
       status: "Hot",
       value: "$45,000",
-      created: "2024-08-15"
+      created: "Aug 15, 2024",
+      initials: "SJ"
     },
     {
       id: 2,
@@ -34,7 +36,8 @@ const Leads = () => {
       source: "Referral",
       status: "Warm",
       value: "$23,000",
-      created: "2024-08-14"
+      created: "Aug 14, 2024",
+      initials: "MC"
     },
     {
       id: 3,
@@ -45,7 +48,8 @@ const Leads = () => {
       source: "LinkedIn",
       status: "Hot",
       value: "$67,000",
-      created: "2024-08-13"
+      created: "Aug 13, 2024",
+      initials: "ED"
     },
     {
       id: 4,
@@ -56,101 +60,134 @@ const Leads = () => {
       source: "Cold Call",
       status: "Cold",
       value: "$34,000",
-      created: "2024-08-12"
+      created: "Aug 12, 2024",
+      initials: "RW"
     }
   ];
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "Hot": return "bg-red-500 text-white";
-      case "Warm": return "bg-yellow-500 text-white";
-      case "Cold": return "bg-blue-500 text-white";
-      default: return "bg-gray-500 text-white";
-    }
+  const getStatusBadge = (status: string) => {
+    const variants = {
+      Hot: "bg-red-100 text-red-700 border-red-200",
+      Warm: "bg-orange-100 text-orange-700 border-orange-200", 
+      Cold: "bg-blue-100 text-blue-700 border-blue-200"
+    };
+    return variants[status as keyof typeof variants] || variants.Cold;
+  };
+
+  const getSourceBadge = (source: string) => {
+    const variants = {
+      Website: "bg-green-100 text-green-700 border-green-200",
+      Referral: "bg-purple-100 text-purple-700 border-purple-200",
+      LinkedIn: "bg-blue-100 text-blue-700 border-blue-200",
+      "Cold Call": "bg-gray-100 text-gray-700 border-gray-200"
+    };
+    return variants[source as keyof typeof variants] || variants.Website;
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
+      {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">All Leads</h1>
-          <p className="text-muted-foreground">Manage and track your sales leads</p>
+          <h1 className="text-3xl font-bold text-gray-900">All Leads</h1>
+          <p className="text-gray-600 mt-1">Manage and track your sales leads</p>
         </div>
-        <div className="flex gap-2">
-          <Button variant="outline">
+        <div className="flex gap-3">
+          <Button variant="outline" className="btn-secondary">
             <Download className="h-4 w-4 mr-2" />
             Export
           </Button>
-          <Button>
+          <Button className="btn-primary">
             <Plus className="h-4 w-4 mr-2" />
             Add Lead
           </Button>
         </div>
       </div>
 
-      <Card>
-        <CardHeader>
+      {/* Main Card */}
+      <Card className="card-enhanced">
+        <CardHeader className="border-b border-gray-100">
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle>Leads Overview</CardTitle>
+              <CardTitle className="text-gray-900">Leads Overview</CardTitle>
               <CardDescription>All your sales prospects in one place</CardDescription>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-3">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input placeholder="Search leads..." className="pl-10 w-64" />
+                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                <Input placeholder="Search leads..." className="pl-10 w-64 border-gray-300 focus:border-primary" />
               </div>
-              <Button variant="outline" size="icon">
+              <Button variant="outline" size="icon" className="border-gray-300 hover:border-primary">
                 <Filter className="h-4 w-4" />
               </Button>
             </div>
           </div>
         </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Name</TableHead>
-                <TableHead>Company</TableHead>
-                <TableHead>Contact</TableHead>
-                <TableHead>Source</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Value</TableHead>
-                <TableHead>Created</TableHead>
-                <TableHead>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {leads.map((lead) => (
-                <TableRow key={lead.id}>
-                  <TableCell className="font-medium">{lead.name}</TableCell>
-                  <TableCell>{lead.company}</TableCell>
-                  <TableCell>
-                    <div>
-                      <p className="text-sm">{lead.email}</p>
-                      <p className="text-xs text-muted-foreground">{lead.phone}</p>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant="outline">{lead.source}</Badge>
-                  </TableCell>
-                  <TableCell>
-                    <Badge className={getStatusColor(lead.status)}>
-                      {lead.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="font-semibold">{lead.value}</TableCell>
-                  <TableCell>{lead.created}</TableCell>
-                  <TableCell>
-                    <div className="flex gap-1">
-                      <Button variant="ghost" size="sm">View</Button>
-                      <Button variant="ghost" size="sm">Edit</Button>
-                    </div>
-                  </TableCell>
+        <CardContent className="p-0">
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow className="border-gray-100">
+                  <TableHead className="font-semibold text-gray-700">Contact</TableHead>
+                  <TableHead className="font-semibold text-gray-700">Company</TableHead>
+                  <TableHead className="font-semibold text-gray-700">Source</TableHead>
+                  <TableHead className="font-semibold text-gray-700">Status</TableHead>
+                  <TableHead className="font-semibold text-gray-700">Value</TableHead>
+                  <TableHead className="font-semibold text-gray-700">Created</TableHead>
+                  <TableHead className="font-semibold text-gray-700">Actions</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {leads.map((lead) => (
+                  <TableRow key={lead.id} className="border-gray-50 hover:bg-gray-50/50 transition-colors">
+                    <TableCell>
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-primary text-white text-xs font-medium flex items-center justify-center">
+                          {lead.initials}
+                        </div>
+                        <div>
+                          <p className="font-medium text-gray-900">{lead.name}</p>
+                          <div className="flex items-center gap-3 mt-1">
+                            <div className="flex items-center gap-1 text-xs text-gray-500">
+                              <Mail className="h-3 w-3" />
+                              {lead.email}
+                            </div>
+                            <div className="flex items-center gap-1 text-xs text-gray-500">
+                              <Phone className="h-3 w-3" />
+                              {lead.phone}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell className="font-medium text-gray-900">{lead.company}</TableCell>
+                    <TableCell>
+                      <Badge className={cn("text-xs border", getSourceBadge(lead.source))}>
+                        {lead.source}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <Badge className={cn("text-xs border font-medium", getStatusBadge(lead.status))}>
+                        {lead.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="font-semibold text-gray-900">{lead.value}</TableCell>
+                    <TableCell className="text-gray-600">{lead.created}</TableCell>
+                    <TableCell>
+                      <div className="flex gap-1">
+                        <Button variant="ghost" size="sm" className="text-primary hover:text-primary/80 hover:bg-blue-50">
+                          View
+                        </Button>
+                        <Button variant="ghost" size="sm" className="text-gray-600 hover:text-gray-800 hover:bg-gray-50">
+                          Edit
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         </CardContent>
       </Card>
     </div>
