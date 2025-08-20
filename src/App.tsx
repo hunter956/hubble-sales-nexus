@@ -14,6 +14,21 @@ import Activities from "./pages/Activities";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
+import QuickAdd from "./pages/QuickAdd";
+import ExportReport from "./pages/ExportReport";
+import CustomizeView from "./pages/CustomizeView";
+import CreateReport from "./pages/CreateReport";
+import Filter from "./pages/Filter";
+import AddLead from "./pages/AddLead";
+import LeadsOverview from "./pages/LeadsOverview";
+import ImportLeads from "./pages/ImportLeads";
+import LeadSources from "./pages/LeadSources";
+import AddOpportunity from "./pages/AddOpportunity";
+import Forecasting from "./pages/Forecasting";
+import WonDeals from "./pages/WonDeals";
+import AddCustomer from "./pages/AddCustomer";
+import Accounts from "./pages/Accounts";
+import Contacts from "./pages/Contacts";
 
 const queryClient = new QueryClient();
 
@@ -25,20 +40,26 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<ModernLayout><Dashboard /></ModernLayout>} />
+          <Route path="/quick-add" element={<ModernLayout><QuickAdd /></ModernLayout>} />
+          <Route path="/export-report" element={<ModernLayout><ExportReport /></ModernLayout>} />
+          <Route path="/customize-view" element={<ModernLayout><CustomizeView /></ModernLayout>} />
+          <Route path="/create-report" element={<ModernLayout><CreateReport /></ModernLayout>} />
+          <Route path="/filter" element={<ModernLayout><Filter /></ModernLayout>} />
           <Route path="/analytics" element={<ModernLayout><Analytics /></ModernLayout>} />
           <Route path="/dashboard-reports" element={<ModernLayout><Reports /></ModernLayout>} />
           <Route path="/leads" element={<ModernLayout><Leads /></ModernLayout>} />
-          <Route path="/leads/add" element={<ModernLayout><Leads /></ModernLayout>} />
-          <Route path="/leads/import" element={<ModernLayout><Leads /></ModernLayout>} />
-          <Route path="/leads/sources" element={<ModernLayout><Leads /></ModernLayout>} />
+          <Route path="/leads/add" element={<ModernLayout><AddLead /></ModernLayout>} />
+          <Route path="/leads/overview" element={<ModernLayout><LeadsOverview /></ModernLayout>} />
+          <Route path="/leads/import" element={<ModernLayout><ImportLeads /></ModernLayout>} />
+          <Route path="/leads/sources" element={<ModernLayout><LeadSources /></ModernLayout>} />
           <Route path="/opportunities" element={<ModernLayout><Opportunities /></ModernLayout>} />
-          <Route path="/opportunities/add" element={<ModernLayout><Opportunities /></ModernLayout>} />
-          <Route path="/opportunities/forecasting" element={<ModernLayout><Opportunities /></ModernLayout>} />
-          <Route path="/opportunities/won" element={<ModernLayout><Opportunities /></ModernLayout>} />
+          <Route path="/opportunities/add" element={<ModernLayout><AddOpportunity /></ModernLayout>} />
+          <Route path="/opportunities/forecasting" element={<ModernLayout><Forecasting /></ModernLayout>} />
+          <Route path="/opportunities/won" element={<ModernLayout><WonDeals /></ModernLayout>} />
           <Route path="/customers" element={<ModernLayout><Customers /></ModernLayout>} />
-          <Route path="/customers/add" element={<ModernLayout><Customers /></ModernLayout>} />
-          <Route path="/customers/accounts" element={<ModernLayout><Customers /></ModernLayout>} />
-          <Route path="/customers/contacts" element={<ModernLayout><Customers /></ModernLayout>} />
+          <Route path="/customers/add" element={<ModernLayout><AddCustomer /></ModernLayout>} />
+          <Route path="/customers/accounts" element={<ModernLayout><Accounts /></ModernLayout>} />
+          <Route path="/customers/contacts" element={<ModernLayout><Contacts /></ModernLayout>} />
           <Route path="/support" element={<ModernLayout><Support /></ModernLayout>} />
           <Route path="/support/open" element={<ModernLayout><Support /></ModernLayout>} />
           <Route path="/support/create" element={<ModernLayout><Support /></ModernLayout>} />
@@ -52,7 +73,6 @@ const App = () => (
           <Route path="/reports/activities" element={<ModernLayout><Reports /></ModernLayout>} />
           <Route path="/reports/custom" element={<ModernLayout><Reports /></ModernLayout>} />
           <Route path="/settings" element={<ModernLayout><Settings /></ModernLayout>} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
