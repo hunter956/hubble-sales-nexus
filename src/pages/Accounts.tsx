@@ -19,8 +19,10 @@ import {
   MoreHorizontal
 } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { useNavigate } from "react-router-dom";
 
 const Accounts = () => {
+  const navigate = useNavigate();
   const accountStats = [
     {
       title: "Total Accounts",
@@ -180,15 +182,15 @@ const Accounts = () => {
           <p className="text-muted-foreground">Manage your customer accounts and relationships</p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline">
+          <Button variant="outline" onClick={() => navigate('/filter')}>
             <Filter className="h-4 w-4 mr-2" />
             Filter
           </Button>
-          <Button variant="outline">
+          <Button variant="outline" onClick={() => navigate('/export-report')}>
             <Download className="h-4 w-4 mr-2" />
             Export
           </Button>
-          <Button>
+          <Button onClick={() => navigate('/add-customer')}>
             <Plus className="h-4 w-4 mr-2" />
             Add Account
           </Button>

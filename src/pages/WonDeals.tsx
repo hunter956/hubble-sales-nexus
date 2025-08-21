@@ -15,8 +15,10 @@ import {
   Target,
   Award
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const WonDeals = () => {
+  const navigate = useNavigate();
   const summaryStats = [
     {
       title: "Total Won Deals",
@@ -171,11 +173,11 @@ const WonDeals = () => {
           <p className="text-muted-foreground">Celebrate your closed-won opportunities</p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline">
+          <Button variant="outline" onClick={() => navigate('/filter')}>
             <Filter className="h-4 w-4 mr-2" />
             Filter
           </Button>
-          <Button variant="outline">
+          <Button variant="outline" onClick={() => navigate('/export-report')}>
             <Download className="h-4 w-4 mr-2" />
             Export
           </Button>

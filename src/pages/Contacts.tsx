@@ -22,8 +22,10 @@ import {
   MessageSquare
 } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { useNavigate } from "react-router-dom";
 
 const Contacts = () => {
+  const navigate = useNavigate();
   const contactStats = [
     {
       title: "Total Contacts",
@@ -195,15 +197,15 @@ const Contacts = () => {
           <p className="text-muted-foreground">Manage your business contacts and relationships</p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline">
+          <Button variant="outline" onClick={() => navigate('/filter')}>
             <Filter className="h-4 w-4 mr-2" />
             Filter
           </Button>
-          <Button variant="outline">
+          <Button variant="outline" onClick={() => navigate('/export-report')}>
             <Download className="h-4 w-4 mr-2" />
             Export
           </Button>
-          <Button>
+          <Button onClick={() => navigate('/add-customer')}>
             <Plus className="h-4 w-4 mr-2" />
             Add Contact
           </Button>

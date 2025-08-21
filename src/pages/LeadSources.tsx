@@ -17,8 +17,10 @@ import {
   BarChart3,
   PieChart
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const LeadSources = () => {
+  const navigate = useNavigate();
   const leadSources = [
     {
       id: 1,
@@ -108,7 +110,7 @@ const LeadSources = () => {
           <h1 className="text-3xl font-bold">Lead Sources</h1>
           <p className="text-muted-foreground">Analyze and manage your lead generation channels</p>
         </div>
-        <Button>
+        <Button onClick={() => navigate('/add-source')}>
           <Plus className="h-4 w-4 mr-2" />
           Add Source
         </Button>

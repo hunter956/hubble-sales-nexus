@@ -11,8 +11,10 @@ import {
   Filter,
   Plus
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Reports = () => {
+  const navigate = useNavigate();
   const reportCategories = [
     {
       title: "Sales Reports",
@@ -108,11 +110,11 @@ const Reports = () => {
           <p className="text-muted-foreground">View insights and generate reports from your CRM data</p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline">
+          <Button variant="outline" onClick={() => navigate('/filter')}>
             <Filter className="h-4 w-4 mr-2" />
             Filter
           </Button>
-          <Button>
+          <Button onClick={() => navigate('/create-report')}>
             <Plus className="h-4 w-4 mr-2" />
             Create Report
           </Button>

@@ -12,8 +12,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Plus, Search, Filter, Building2, Users, Phone, Mail } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Customers = () => {
+  const navigate = useNavigate();
   const customers = [
     {
       id: 1,
@@ -90,11 +92,11 @@ const Customers = () => {
           <p className="text-muted-foreground">Manage your customer accounts and relationships</p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline">
+          <Button variant="outline" onClick={() => navigate('/accounts')}>
             <Building2 className="h-4 w-4 mr-2" />
             Accounts
           </Button>
-          <Button>
+          <Button onClick={() => navigate('/add-customer')}>
             <Plus className="h-4 w-4 mr-2" />
             Add Customer
           </Button>

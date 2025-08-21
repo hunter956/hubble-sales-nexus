@@ -4,8 +4,10 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Plus, DollarSign, TrendingUp, Calendar, Users, Target, CheckCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useNavigate } from "react-router-dom";
 
 const Opportunities = () => {
+  const navigate = useNavigate();
   const pipelineStages = [
     { name: "Prospecting", count: 15, value: "$450K", color: "bg-blue-600", percentage: 12 },
     { name: "Qualification", count: 8, value: "$320K", color: "bg-indigo-600", percentage: 25 },
@@ -94,7 +96,7 @@ const Opportunities = () => {
           <h1 className="text-3xl font-bold text-gray-900">Sales Pipeline</h1>
           <p className="text-gray-600 mt-1">Track and manage your sales opportunities</p>
         </div>
-        <Button className="btn-primary">
+        <Button className="btn-primary" onClick={() => navigate('/add-opportunity')}>
           <Plus className="h-4 w-4 mr-2" />
           Add Opportunity
         </Button>
