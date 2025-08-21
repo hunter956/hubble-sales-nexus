@@ -13,8 +13,10 @@ import {
 } from "lucide-react";
 import dashboardImage from "@/assets/dashboard-analytics.jpg";
 import { cn } from "@/lib/utils";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const metrics = [
     {
       title: "Total Leads",
@@ -80,7 +82,7 @@ const Dashboard = () => {
           <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
           <p className="text-gray-600 mt-1">Welcome back, John! Here's what's happening with your business.</p>
         </div>
-        <Button className="btn-primary shadow-sm">
+        <Button className="btn-primary shadow-sm" onClick={() => navigate('/quick-add')}>
           <Plus className="h-4 w-4 mr-2" />
           Quick Add
         </Button>

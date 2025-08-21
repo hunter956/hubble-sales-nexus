@@ -14,8 +14,10 @@ import {
   PieChart,
   LineChart
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Analytics = () => {
+  const navigate = useNavigate();
   const performanceMetrics = [
     {
       title: "Revenue Growth",
@@ -96,8 +98,8 @@ const Analytics = () => {
           <p className="text-muted-foreground">Deep insights into your sales performance and trends</p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline">Export Report</Button>
-          <Button>Customize View</Button>
+          <Button variant="outline" onClick={() => navigate('/export-report')}>Export Report</Button>
+          <Button onClick={() => navigate('/customize-view')}>Customize View</Button>
         </div>
       </div>
 
